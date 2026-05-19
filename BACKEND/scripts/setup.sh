@@ -27,8 +27,10 @@ if [[ $ROTATE -eq 1 ]] || [[ ! -f secrets/jwt_private.pem ]]; then
   echo "→ generating RS256 JWT keypair under secrets/"
   openssl genpkey -algorithm RSA -pkeyopt rsa_keygen_bits:2048 -out secrets/jwt_private.pem
   openssl rsa -in secrets/jwt_private.pem -pubout -out secrets/jwt_public.pem
-  chmod 600 secrets/jwt_private.pem
-  chmod 644 secrets/jwt_public.pem
+  # 644, not 600: the backend container runs as an unprivileged non-host UID and must
+  # be able to read the key through the bind mount. The parent `secrets/` dir is 700,
+  # so other host users still can't reach the file.
+  chmod 644 secrets/jwt_private.pem secrets/jwt_public.pem
 fi
 
 mkdir -p backups
