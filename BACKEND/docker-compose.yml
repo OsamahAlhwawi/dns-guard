@@ -37,7 +37,7 @@ services:
     container_name: dns-guard-adguard
     restart: unless-stopped
     volumes:
-      - ./adguard/AdGuardHome.yaml:/opt/adguardhome/conf/AdGuardHome.yaml
+      - ./adguard/conf:/opt/adguardhome/conf
       - adguard_work:/opt/adguardhome/work
     ports:
       - "127.0.0.1:3000:3000"

@@ -1,6 +1,6 @@
 # AdGuard Home — DNS Guard config
 
-This directory holds the seed config (`AdGuardHome.yaml`) mounted into the `adguardhome` container.
+The seed config lives at `conf/AdGuardHome.yaml`. The `conf/` directory is bind-mounted into the container at `/opt/adguardhome/conf`. We mount the directory (not the file) so AdGuard's config migrator can rewrite `AdGuardHome.yaml` on upgrades — single-file bind mounts break that rename.
 
 ## First-time setup
 
