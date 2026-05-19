@@ -27,14 +27,24 @@ if [[ -z "$PASSWORD" ]]; then
   read -rsp "admin password: " PASSWORD; echo
 fi
 
+if [[ -z "$USERNAME" || -z "$PASSWORD" ]]; then
+  echo "username and password are required" >&2
+  exit 2
+fi
+
 if ! docker compose ps backend 2>/dev/null | grep -q backend; then
   echo "backend container is not running; run 'docker compose up -d' first" >&2
   exit 1
 fi
 
-docker compose exec -T backend bun -e '
+docker compose exec -T \
+  -e ADMIN_USERNAME="$USERNAME" \
+  -e ADMIN_PASSWORD="$PASSWORD" \
+  backend bun -e '
 import * as users from "/app/src/services/userService.ts";
-const [u, p] = process.argv.slice(-2);
+const u = process.env.ADMIN_USERNAME;
+const p = process.env.ADMIN_PASSWORD;
+if (!u || !p) { console.error("missing ADMIN_USERNAME/ADMIN_PASSWORD"); process.exit(2); }
 const existing = users.findByUsername(u);
 if (existing) {
   const updated = users.updateUser(existing.id, { role: "admin", is_active: true, is_suspended: false });
@@ -43,4 +53,4 @@ if (existing) {
   const created = await users.createUser({ username: u, password: p, role: "admin", is_active: true });
   console.log(JSON.stringify({ created: true, user: { id: created.id, username: created.username, role: created.role, is_active: created.is_active } }, null, 2));
 }
-' "$USERNAME" "$PASSWORD"
+'
