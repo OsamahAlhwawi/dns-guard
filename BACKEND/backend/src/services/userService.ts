@@ -64,19 +64,19 @@ export async function createUser(input: CreateUserInput): Promise<PublicUser> {
 
   const stmt = db.prepare(`
     INSERT INTO users (username, password_hash, email, full_name, token, client_id, role, is_active, daily_limit)
-    VALUES (@username, @password_hash, @email, @full_name, @token, @client_id, @role, @is_active, @daily_limit)
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
   `);
-  const info = stmt.run({
-    username: input.username,
+  const info = stmt.run(
+    input.username,
     password_hash,
-    email: input.email ?? null,
-    full_name: input.full_name ?? null,
+    input.email ?? null,
+    input.full_name ?? null,
     token,
     client_id,
     role,
     is_active,
     daily_limit,
-  });
+  );
 
   try {
     await adguard.addClient(client_id, input.username);
