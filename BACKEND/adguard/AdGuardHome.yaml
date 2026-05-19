@@ -10,7 +10,7 @@ http:
   session_ttl: 720h
 users:
   - name: admin
-    password: $2a$10$REPLACE_WITH_BCRYPT_HASH_FROM_HTPASSWD
+    password: $2a$12$8rb3OWxbFsx/6cfLSx1xUeDcT0Ge0ii6OCp1jb5cMp1sifrqpjdL6
 auth_attempts: 5
 block_auth_min: 15
 http_proxy: ""
