@@ -27,7 +27,7 @@ const envSchema = z.object({
 
   LOGIN_MAX_ATTEMPTS: z.coerce.number().int().positive().default(5),
   LOGIN_LOCKOUT_MINUTES: z.coerce.number().int().positive().default(15),
-  DEFAULT_DAILY_LIMIT: z.coerce.number().int().positive().default(100_000),
+  DEFAULT_DAILY_LIMIT: z.coerce.number().int().nonnegative().default(0),
 
   TOKEN_RATE_LIMIT_PER_MIN: z.coerce.number().int().positive().default(2_000),
 

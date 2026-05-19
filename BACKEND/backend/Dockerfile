@@ -5,7 +5,7 @@ RUN bun install --production
 
 FROM oven/bun:1-alpine AS runtime
 WORKDIR /app
-RUN apk add --no-cache wget && \
+RUN apk add --no-cache wget sqlite && \
     addgroup -S app && adduser -S -G app -h /app app && \
     mkdir -p /data && chown -R app:app /data
 COPY --from=deps /app/node_modules ./node_modules

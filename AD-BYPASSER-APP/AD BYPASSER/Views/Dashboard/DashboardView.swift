@@ -36,6 +36,11 @@ struct DashboardView: View {
         }
     }
 
+    private var dailyLimitLabel: String {
+        let n = vm.todayStats?.daily_limit ?? 0
+        return n <= 0 ? String(localized: "dashboard.unlimited") : n.arabic
+    }
+
     private var quickStats: some View {
         LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 12) {
             StatCard(
@@ -57,7 +62,7 @@ struct DashboardView: View {
             )
             StatCard(
                 title: "dashboard.daily_limit",
-                value: (vm.todayStats?.daily_limit ?? 0).arabic,
+                value: dailyLimitLabel,
                 systemImage: "gauge.with.dots.needle.50percent",
                 tint: .blue
             )

@@ -14,7 +14,7 @@ CREATE TABLE IF NOT EXISTS users (
     is_active INTEGER NOT NULL DEFAULT 0,
     is_suspended INTEGER NOT NULL DEFAULT 0,
     plan TEXT NOT NULL DEFAULT 'standard',
-    daily_limit INTEGER NOT NULL DEFAULT 100000,
+    daily_limit INTEGER NOT NULL DEFAULT 0,
     created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     last_login DATETIME,
     last_used DATETIME,

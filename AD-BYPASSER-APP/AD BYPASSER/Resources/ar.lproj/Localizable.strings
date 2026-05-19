@@ -44,10 +44,14 @@
 "dashboard.unprotected" = "غير محمي";
 "dashboard.enable" = "تفعيل الحماية";
 "dashboard.disable" = "إيقاف الحماية";
+"dashboard.open_settings" = "افتح الإعدادات لاختيار DNS Guard";
+"dashboard.profile.installed" = "تم تثبيت ملف DNS Guard";
+"dashboard.profile.next_step" = "افتح الإعدادات → عام → VPN, DNS وإدارة الأجهزة → DNS، ثم اختر DNS Guard. سيتحول الزر إلى \"محمي\" خلال 30 ثانية بعد رجوعك للتطبيق.";
 "dashboard.queries_today" = "استعلامات اليوم";
 "dashboard.blocked_today" = "محجوب اليوم";
 "dashboard.block_ratio" = "نسبة الحجب";
 "dashboard.daily_limit" = "الحد اليومي";
+"dashboard.unlimited" = "بدون حد";
 
 /* status */
 "status.active" = "نشط";
@@ -79,6 +83,26 @@
 "settings.change_password" = "تغيير كلمة المرور";
 "settings.password_changed" = "تم تغيير كلمة المرور";
 "settings.sign_out" = "تسجيل الخروج";
+"settings.advanced" = "متقدم";
+"settings.diagnostics" = "التشخيص";
+
+/* diagnostics */
+"diag.title" = "التشخيص";
+"diag.profile" = "ملف DNS";
+"diag.installed" = "مثبّت";
+"diag.enabled" = "مفعّل";
+"diag.expected_url" = "العنوان المتوقع";
+"diag.installed_url" = "العنوان المثبّت";
+"diag.url_mismatch" = "العنوان المثبت لا يطابق المتوقع — اضغط \"إعادة تثبيت قسري\".";
+"diag.resolved_ips" = "IPs المحلولة";
+"diag.actions" = "إجراءات";
+"diag.refresh" = "تحديث الحالة";
+"diag.force_reinstall" = "إعادة تثبيت قسري";
+"diag.force_remove" = "حذف الملف من النظام";
+"diag.test_backend" = "اختبر الاتصال بالسيرفر";
+"diag.recent_log" = "السجل الأخير";
+"diag.no_log" = "لا يوجد سجل بعد";
+"diag.clear_log" = "مسح السجل";
 
 /* admin */
 "admin.overview" = "ملخص النظام";

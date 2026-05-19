@@ -69,9 +69,12 @@ async function handleDoH(c: Parameters<Parameters<typeof app.get>[1]>[0], token:
     return refuse(reqId, 429);
   }
 
-  const todayUsage = users.getTodayUsage(entry.user_id);
-  if (todayUsage.queries >= entry.daily_limit) {
-    return refuse(reqId, 429);
+  // daily_limit = 0 means unlimited
+  if (entry.daily_limit > 0) {
+    const todayUsage = users.getTodayUsage(entry.user_id);
+    if (todayUsage.queries >= entry.daily_limit) {
+      return refuse(reqId, 429);
+    }
   }
 
   let upstream: Response;
@@ -88,13 +91,65 @@ async function handleDoH(c: Parameters<Parameters<typeof app.get>[1]>[0], token:
     return refuse(reqId, 502);
   }
 
-  users.bumpUsage(entry.user_id, false);
+  // Buffer body so we can both inspect it (blocked-or-not) and forward it back.
+  const upstreamBytes = new Uint8Array(await upstream.arrayBuffer());
+  const blocked = upstream.ok ? isBlockedDnsResponse(upstreamBytes) : false;
+  users.bumpUsage(entry.user_id, blocked);
 
   const headers = new Headers();
   const ct = upstream.headers.get("Content-Type");
   if (ct) headers.set("Content-Type", ct);
   headers.set("Cache-Control", "no-store");
-  return new Response(upstream.body, { status: upstream.status, headers });
+  return new Response(upstreamBytes, { status: upstream.status, headers });
+}
+
+// Skip a DNS-encoded name. Handles compression pointers (top two bits set) by
+// treating the 2-byte pointer as terminal — we don't need to follow it.
+function skipName(body: Uint8Array, off: number): number {
+  while (off < body.length) {
+    const len = body[off]!;
+    if (len === 0) return off + 1;
+    if ((len & 0xc0) === 0xc0) return off + 2;
+    off += 1 + len;
+  }
+  return off;
+}
+
+// AdGuard's default block response is either a non-zero RCODE (NXDOMAIN/REFUSED),
+// an empty answer section, or an A=0.0.0.0 / AAAA=:: synthetic answer.
+function isBlockedDnsResponse(body: Uint8Array): boolean {
+  if (body.length < 12) return false;
+  const rcode = body[3]! & 0x0f;
+  if (rcode !== 0) return true;
+  const qdCount = (body[4]! << 8) | body[5]!;
+  const anCount = (body[6]! << 8) | body[7]!;
+  if (anCount === 0) return true;
+
+  let off = 12;
+  for (let i = 0; i < qdCount; i++) {
+    off = skipName(body, off) + 4;
+  }
+  for (let i = 0; i < anCount; i++) {
+    off = skipName(body, off);
+    if (off + 10 > body.length) return false;
+    const type = (body[off]! << 8) | body[off + 1]!;
+    const rdlen = (body[off + 8]! << 8) | body[off + 9]!;
+    const rdStart = off + 10;
+    if (rdStart + rdlen > body.length) return false;
+    if (type === 1 && rdlen === 4) {
+      if (body[rdStart] === 0 && body[rdStart + 1] === 0 && body[rdStart + 2] === 0 && body[rdStart + 3] === 0) {
+        return true;
+      }
+    } else if (type === 28 && rdlen === 16) {
+      let allZero = true;
+      for (let j = 0; j < 16; j++) {
+        if (body[rdStart + j] !== 0) { allZero = false; break; }
+      }
+      if (allZero) return true;
+    }
+    off = rdStart + rdlen;
+  }
+  return false;
 }
 
 app.get("/:token", (c) => handleDoH(c, c.req.param("token")));

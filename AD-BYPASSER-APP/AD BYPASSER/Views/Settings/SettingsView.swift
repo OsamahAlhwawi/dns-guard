@@ -51,6 +51,16 @@ struct SettingsView: View {
                 Section { Text(msg).foregroundStyle(.green) }
             }
 
+            if auth.currentUser?.isAdmin == true {
+                Section("settings.advanced") {
+                    NavigationLink {
+                        DiagnosticsView()
+                    } label: {
+                        Label("settings.diagnostics", systemImage: "stethoscope")
+                    }
+                }
+            }
+
             Section {
                 Button("settings.sign_out", role: .destructive) {
                     Task { await vm.logout() }
