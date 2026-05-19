@@ -1,0 +1,59 @@
+name: dns-guard
+
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: dns-guard-backend
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      NODE_ENV: production
+      DB_PATH: /data/dns-guard.sqlite
+      JWT_PRIVATE_KEY_PATH: /run/secrets/jwt_private.pem
+      JWT_PUBLIC_KEY_PATH: /run/secrets/jwt_public.pem
+      ADGUARD_URL: http://adguardhome:3000
+      PORT: "8080"
+    volumes:
+      - backend_data:/data
+      - ./secrets/jwt_private.pem:/run/secrets/jwt_private.pem:ro
+      - ./secrets/jwt_public.pem:/run/secrets/jwt_public.pem:ro
+    ports:
+      - "127.0.0.1:8080:8080"
+    depends_on:
+      adguardhome:
+        condition: service_healthy
+    networks:
+      - dns-guard-net
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://127.0.0.1:8080/healthz"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+
+  adguardhome:
+    image: adguard/adguardhome:latest
+    container_name: dns-guard-adguard
+    restart: unless-stopped
+    volumes:
+      - ./adguard/AdGuardHome.yaml:/opt/adguardhome/conf/AdGuardHome.yaml
+      - adguard_work:/opt/adguardhome/work
+    ports:
+      - "127.0.0.1:3000:3000"
+    networks:
+      - dns-guard-net
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://127.0.0.1:3000/control/status"]
+      interval: 30s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+
+volumes:
+  backend_data:
+  adguard_work:
+
+networks:
+  dns-guard-net:
+    driver: bridge

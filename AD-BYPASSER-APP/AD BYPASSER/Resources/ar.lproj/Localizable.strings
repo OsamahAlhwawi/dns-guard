@@ -1,0 +1,137 @@
+/* common */
+"common.loading" = "جاري التحميل...";
+"common.cancel" = "إلغاء";
+"common.save" = "حفظ";
+
+/* tabs */
+"tab.dashboard" = "الرئيسية";
+"tab.stats" = "الإحصاءات";
+"tab.admin" = "الإدارة";
+"tab.settings" = "الإعدادات";
+
+/* onboarding */
+"onboarding.slide1.title" = "حماية كاملة";
+"onboarding.slide1.body" = "حجب الإعلانات والمتعقبات على كل تطبيقات جهازك بدفعة واحدة.";
+"onboarding.slide2.title" = "اتصال مشفّر";
+"onboarding.slide2.body" = "كل استعلامات DNS تمر عبر HTTPS — لا يستطيع أحد التنصت.";
+"onboarding.slide3.title" = "إحصاءاتك أنت";
+"onboarding.slide3.body" = "تابع عدد المواقع المحجوبة ونسب الحماية في تطبيقك الخاص.";
+"onboarding.next" = "التالي";
+"onboarding.start" = "ابدأ";
+
+/* auth */
+"auth.login.title" = "تسجيل الدخول";
+"auth.register.title" = "إنشاء حساب";
+"auth.create_account" = "إنشاء حساب";
+"auth.username" = "اسم المستخدم";
+"auth.password" = "كلمة المرور";
+"auth.full_name" = "الاسم الكامل";
+"auth.email" = "البريد الإلكتروني";
+"auth.login.action" = "تسجيل الدخول";
+"auth.register.action" = "إنشاء الحساب";
+"auth.section.required" = "بيانات إلزامية";
+"auth.section.optional" = "بيانات اختيارية";
+
+/* pending activation */
+"pending.title" = "بانتظار التفعيل";
+"pending.body" = "تم إنشاء حسابك. سيقوم المسؤول بتفعيله قريباً.";
+"pending.username_label" = "اسم المستخدم";
+"pending.refresh" = "تحقق من الحالة";
+"pending.logout" = "تسجيل الخروج";
+
+/* dashboard */
+"dashboard.protected" = "محمي";
+"dashboard.unprotected" = "غير محمي";
+"dashboard.enable" = "تفعيل الحماية";
+"dashboard.disable" = "إيقاف الحماية";
+"dashboard.queries_today" = "استعلامات اليوم";
+"dashboard.blocked_today" = "محجوب اليوم";
+"dashboard.block_ratio" = "نسبة الحجب";
+"dashboard.daily_limit" = "الحد اليومي";
+
+/* status */
+"status.active" = "نشط";
+"status.pending" = "بانتظار التفعيل";
+"status.suspended" = "موقوف";
+"status.expired" = "منتهي";
+"status.unknown" = "غير معروف";
+
+/* stats */
+"stats.period" = "الفترة";
+"stats.period.day" = "24 ساعة";
+"stats.period.week" = "7 أيام";
+"stats.period.month" = "30 يوم";
+"stats.today.queries" = "استعلامات اليوم";
+"stats.today.blocked" = "محجوب اليوم";
+"stats.empty" = "لا توجد بيانات بعد";
+
+/* settings */
+"settings.account" = "الحساب";
+"settings.profile" = "الملف الشخصي";
+"settings.security" = "الأمان";
+"settings.username" = "اسم المستخدم";
+"settings.role" = "الدور";
+"settings.plan" = "الباقة";
+"settings.save" = "حفظ";
+"settings.saved" = "تم الحفظ";
+"settings.current_password" = "كلمة المرور الحالية";
+"settings.new_password" = "كلمة المرور الجديدة";
+"settings.change_password" = "تغيير كلمة المرور";
+"settings.password_changed" = "تم تغيير كلمة المرور";
+"settings.sign_out" = "تسجيل الخروج";
+
+/* admin */
+"admin.overview" = "ملخص النظام";
+"admin.badge" = "مسؤول";
+"admin.search" = "بحث";
+"admin.users.total" = "إجمالي المستخدمين";
+"admin.users.active" = "نشطون";
+"admin.users.pending" = "بانتظار التفعيل";
+"admin.users.suspended" = "موقوفون";
+"admin.users.list" = "كل المستخدمين";
+"admin.pending.list" = "بانتظار التفعيل";
+"admin.pending.empty" = "لا يوجد مستخدمون بانتظار التفعيل";
+"admin.queries.total" = "إجمالي الاستعلامات";
+"admin.blocked.total" = "إجمالي المحجوب";
+"admin.queries.today" = "استعلامات اليوم";
+"admin.blocked.today" = "محجوب اليوم";
+
+"admin.user.identity" = "البيانات";
+"admin.user.actions" = "الإجراءات";
+"admin.user.stats" = "الإحصاءات";
+"admin.user.recent_logs" = "آخر الاستعلامات";
+"admin.user.client_id" = "معرف العميل";
+"admin.user.created" = "أُنشئ في";
+"admin.user.expires" = "ينتهي في";
+"admin.user.daily_limit" = "الحد اليومي";
+
+"admin.activate" = "تفعيل";
+"admin.suspend" = "إيقاف";
+"admin.unsuspend" = "إعادة التفعيل";
+"admin.promote" = "ترقية إلى مسؤول";
+"admin.demote" = "إنزال إلى مستخدم";
+"admin.delete" = "حذف";
+"admin.delete_confirm" = "تأكيد حذف المستخدم؟";
+"admin.apply" = "تطبيق";
+"admin.logs.empty" = "لا توجد سجلات حديثة";
+
+/* validation */
+"validation.username.length" = "يجب أن يتكون اسم المستخدم من 3 إلى 20 حرفاً";
+"validation.username.alphanumeric" = "اسم المستخدم: حروف وأرقام فقط";
+"validation.password.length" = "كلمة المرور: 8 أحرف على الأقل";
+"validation.password.letter" = "يجب أن تحتوي كلمة المرور على حرف";
+"validation.password.digit" = "يجب أن تحتوي كلمة المرور على رقم";
+"validation.password.symbol" = "يجب أن تحتوي كلمة المرور على رمز";
+"validation.password.required" = "كلمة المرور مطلوبة";
+"validation.email.format" = "بريد إلكتروني غير صالح";
+
+/* errors */
+"error.transport" = "تعذر الاتصال بالخادم";
+"error.decoding" = "بيانات غير متوقعة من الخادم";
+"error.unauthorized" = "غير مصرّح";
+"error.forbidden" = "ممنوع";
+"error.not_found" = "غير موجود";
+"error.no_network" = "لا يوجد اتصال بالإنترنت";
+"error.bad_request" = "طلب غير صالح";
+"error.invalid_credentials" = "بيانات الدخول غير صحيحة";
+"error.username_taken" = "اسم المستخدم محجوز";

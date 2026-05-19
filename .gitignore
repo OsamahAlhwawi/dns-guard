@@ -1,0 +1,19 @@
+.DS_Store
+
+# macOS / Xcode
+xcuserdata/
+*.xcuserdatad/
+DerivedData/
+build/
+*.xcworkspace/xcshareddata/swiftpm/
+
+# Backend
+BACKEND/.env
+BACKEND/secrets/
+BACKEND/backups/
+BACKEND/backend/node_modules/
+BACKEND/backend/dist/
+BACKEND/backend/data/
+
+# Misc
+*.log
