@@ -10,7 +10,7 @@ struct StatsView: View {
                 VStack(spacing: 16) {
                     Picker("stats.period", selection: $vm.period) {
                         ForEach(StatsViewModel.Period.allCases) { p in
-                            Text(String(localized: p.titleKey)).tag(p)
+                            Text(NSLocalizedString(p.titleKey, comment: "")).tag(p)
                         }
                     }
                     .pickerStyle(.segmented)

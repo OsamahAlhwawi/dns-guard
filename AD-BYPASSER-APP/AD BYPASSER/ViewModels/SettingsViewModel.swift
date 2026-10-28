@@ -25,14 +25,14 @@ final class SettingsViewModel {
     func saveProfile() async {
         // The /v1/user/profile PATCH endpoint accepts full_name/email; we don't expose it on APIClient yet,
         // so this is a placeholder hook — implement when needed.
-        lastMessage = String(localized: "settings.saved")
+        lastMessage = NSLocalizedString("settings.saved", comment: "")
     }
 
     func changePassword() async -> Bool {
         newPasswordError = Validators.password(newPassword)
         guard newPasswordError == nil else { return false }
         // Likewise, expose /v1/user/password on APIClient and call here.
-        lastMessage = String(localized: "settings.password_changed")
+        lastMessage = NSLocalizedString("settings.password_changed", comment: "")
         currentPassword = ""
         newPassword = ""
         return true

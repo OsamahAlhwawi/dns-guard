@@ -9,7 +9,7 @@ final class StatsViewModel {
         case week = "7d"
         case month = "30d"
         var id: String { rawValue }
-        var titleKey: String.LocalizationValue {
+        var titleKey: String {
             switch self {
             case .day: return "stats.period.day"
             case .week: return "stats.period.week"

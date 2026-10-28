@@ -13,15 +13,15 @@ enum APIError: Error, LocalizedError, Equatable {
 
     var errorDescription: String? {
         switch self {
-        case .transport: return String(localized: "error.transport")
-        case .decoding: return String(localized: "error.decoding")
-        case .unauthorized: return String(localized: "error.unauthorized")
-        case .forbidden: return String(localized: "error.forbidden")
-        case .notFound: return String(localized: "error.not_found")
+        case .transport: return NSLocalizedString("error.transport", comment: "")
+        case .decoding: return NSLocalizedString("error.decoding", comment: "")
+        case .unauthorized: return NSLocalizedString("error.unauthorized", comment: "")
+        case .forbidden: return NSLocalizedString("error.forbidden", comment: "")
+        case .notFound: return NSLocalizedString("error.not_found", comment: "")
         case .conflict(let m): return m
         case .server(_, let m): return m
         case .validation(let m): return m
-        case .noNetwork: return String(localized: "error.no_network")
+        case .noNetwork: return NSLocalizedString("error.no_network", comment: "")
         }
     }
 }

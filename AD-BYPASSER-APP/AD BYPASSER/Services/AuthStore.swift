@@ -44,7 +44,7 @@ final class AuthStore {
             if let u = tokens.user { user = u } else { user = try await api.me() }
             apply(user: user)
         } catch let APIError.unauthorized {
-            lastError = String(localized: "error.invalid_credentials")
+            lastError = NSLocalizedString("error.invalid_credentials", comment: "")
             state = .unauthenticated
         } catch {
             lastError = (error as? LocalizedError)?.errorDescription ?? error.localizedDescription
@@ -60,7 +60,7 @@ final class AuthStore {
             await login(username: username, password: password)
             return true
         } catch let APIError.conflict(m) {
-            lastError = m.isEmpty ? String(localized: "error.username_taken") : m
+            lastError = m.isEmpty ? NSLocalizedString("error.username_taken", comment: "") : m
             return false
         } catch {
             lastError = (error as? LocalizedError)?.errorDescription ?? error.localizedDescription

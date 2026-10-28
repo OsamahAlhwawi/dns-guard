@@ -20,7 +20,7 @@ final class AuthViewModel {
 
     func validateForLogin() -> Bool {
         usernameError = Validators.username(username)
-        passwordError = password.isEmpty ? String(localized: "validation.password.required") : nil
+        passwordError = password.isEmpty ? NSLocalizedString("validation.password.required", comment: "") : nil
         return usernameError == nil && passwordError == nil
     }
 

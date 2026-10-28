@@ -38,7 +38,7 @@ struct DashboardView: View {
 
     private var dailyLimitLabel: String {
         let n = vm.todayStats?.daily_limit ?? 0
-        return n <= 0 ? String(localized: "dashboard.unlimited") : n.arabic
+        return n <= 0 ? NSLocalizedString("dashboard.unlimited", comment: "") : n.arabic
     }
 
     private var quickStats: some View {

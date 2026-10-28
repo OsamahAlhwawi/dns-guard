@@ -9,7 +9,7 @@ enum Constants {
     static let dnsBaseURL = URL(string: "https://abs.whao.tech")!
 
     /// Bundle identifier — also used as the keychain service name.
-    static let bundleID = "WHAOTECH.AD-BYPASSER"
+    static let bundleID = "tech.whao.dnsguard"
 
     /// localizedDescription on the NEDNSSettings profile (shown in Settings UI).
     static let dnsProfileLabel = "DNS Guard"

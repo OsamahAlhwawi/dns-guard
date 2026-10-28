@@ -6,18 +6,18 @@ struct MainTabs: View {
     var body: some View {
         TabView {
             DashboardView()
-                .tabItem { Label(String(localized: "tab.dashboard"), systemImage: "shield.fill") }
+                .tabItem { Label(NSLocalizedString("tab.dashboard", comment: ""), systemImage: "shield.fill") }
 
             StatsView()
-                .tabItem { Label(String(localized: "tab.stats"), systemImage: "chart.bar.fill") }
+                .tabItem { Label(NSLocalizedString("tab.stats", comment: ""), systemImage: "chart.bar.fill") }
 
             if user.isAdmin {
                 AdminTabView()
-                    .tabItem { Label(String(localized: "tab.admin"), systemImage: "person.3.fill") }
+                    .tabItem { Label(NSLocalizedString("tab.admin", comment: ""), systemImage: "person.3.fill") }
             }
 
             SettingsView()
-                .tabItem { Label(String(localized: "tab.settings"), systemImage: "gearshape.fill") }
+                .tabItem { Label(NSLocalizedString("tab.settings", comment: ""), systemImage: "gearshape.fill") }
         }
     }
 }

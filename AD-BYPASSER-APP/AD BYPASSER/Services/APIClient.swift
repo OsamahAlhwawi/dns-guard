@@ -182,7 +182,7 @@ final class APIClient {
                 throw APIError.decoding(error.localizedDescription)
             }
         case 400:
-            throw APIError.validation(decodeErrorMessage(data) ?? String(localized: "error.bad_request"))
+            throw APIError.validation(decodeErrorMessage(data) ?? NSLocalizedString("error.bad_request", comment: ""))
         case 401:
             if requiresAuth, retryOn401, try await refreshAccessToken() != nil {
                 return try await send(method: method, path: path, body: body, requiresAuth: requiresAuth, retryOn401: false)
